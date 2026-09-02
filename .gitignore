@@ -6,4 +6,3 @@ out/
 .env*.local
 *.log
 .DS_Store
-public/pdf.worker.min.js
