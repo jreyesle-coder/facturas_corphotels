@@ -21,7 +21,7 @@ a{color:var(--accent)}
 .appnav{position:sticky;top:0;z-index:20;background:linear-gradient(90deg,var(--brand-navy),var(--brand-navy-2));border-bottom:3px solid var(--gov-blue);box-shadow:0 2px 10px rgba(12,44,84,.18)}
 .appnav-inner{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:18px;min-height:60px;flex-wrap:wrap}
 .appnav-brand{font-weight:700;font-size:14px;color:#fff;display:flex;align-items:center}
-.appnav-brand img{height:32px;width:auto;display:block}
+.appnav-brand img{height:44px;width:auto;display:block}
 .appnav-tabs{display:flex;gap:4px;flex:1}
 .appnav-tabs .tab{text-decoration:none;color:rgba(255,255,255,.72);font-size:13.5px;font-weight:600;padding:8px 13px;border-radius:8px}
 .appnav-tabs .tab:hover{background:rgba(255,255,255,.12);color:#fff}
@@ -39,7 +39,7 @@ a{color:var(--accent)}
 
 /* Login */
 .login-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:20px;background:linear-gradient(160deg,var(--brand-navy),var(--brand-navy-2) 60%,var(--gov-blue))}
-.login-logo img{height:56px;width:auto;display:block}
+.login-logo img{height:82px;width:auto;display:block}
 .login-logo.text{color:#fff;font-weight:700;font-size:22px;letter-spacing:.5px}
 .login-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.28);padding:28px;width:100%;max-width:370px;border-top:4px solid var(--gov-blue)}
 .login-box h1{font-size:19px;margin:0;color:var(--brand-navy)}
