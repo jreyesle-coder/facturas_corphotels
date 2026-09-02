@@ -1,37 +1,48 @@
 :root{
-  --bg:#f4f6f8; --panel:#ffffff; --ink:#1a2230; --muted:#6b7686; --line:#e4e8ee;
-  --claro:#da2f2f; --altice:#1566d6; --up:#c62828; --down:#1a8f4c; --same:#6b7686;
-  --accent:#2f5fe0; --shadow:0 1px 3px rgba(20,30,50,.08),0 4px 16px rgba(20,30,50,.06);
+  /* Paleta oficial — Sistema de Diseño Dominicano + bandera */
+  --gov-blue:#0F539C;         /* azul primario del gobierno */
+  --gov-blue-med:#66A1DE;
+  --gov-blue-light:#9FD0FD;
+  --brand-navy:#0C2C54;       /* azul institucional profundo (barra / login) */
+  --brand-navy-2:#123a70;
+  --gov-red:#CE1126;          /* rojo bandera */
+  --bg:#f3f5f8; --panel:#ffffff; --ink:#16233a; --muted:#5f6b7c; --line:#e2e7ef;
+  --claro:#da2f2f; --altice:#1566d6; --up:#CE1126; --down:#1a8f4c; --same:#5f6b7c;
+  --accent:var(--gov-blue); --shadow:0 1px 3px rgba(12,44,84,.08),0 4px 16px rgba(12,44,84,.06);
+  --font:var(--font-poppins),"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.5}
 a{color:var(--accent)}
 .wrap{max-width:1080px;margin:0 auto;padding:24px 20px 64px}
 
-/* Barra de navegación */
-.appnav{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 1px 3px rgba(20,30,50,.05)}
-.appnav-inner{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:18px;min-height:54px;flex-wrap:wrap}
-.appnav-brand{font-weight:700;font-size:14px}
+/* Barra de navegación — azul institucional */
+.appnav{position:sticky;top:0;z-index:20;background:linear-gradient(90deg,var(--brand-navy),var(--brand-navy-2));border-bottom:3px solid var(--gov-blue);box-shadow:0 2px 10px rgba(12,44,84,.18)}
+.appnav-inner{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:18px;min-height:60px;flex-wrap:wrap}
+.appnav-brand{font-weight:700;font-size:14px;color:#fff;display:flex;align-items:center}
+.appnav-brand img{height:32px;width:auto;display:block}
 .appnav-tabs{display:flex;gap:4px;flex:1}
-.appnav-tabs .tab{text-decoration:none;color:var(--muted);font-size:13.5px;font-weight:600;padding:8px 12px;border-radius:8px}
-.appnav-tabs .tab:hover{background:#f2f5f9;color:var(--ink)}
-.appnav-tabs .tab.active{background:#eef3ff;color:var(--accent)}
-.appnav-user{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--muted)}
+.appnav-tabs .tab{text-decoration:none;color:rgba(255,255,255,.72);font-size:13.5px;font-weight:600;padding:8px 13px;border-radius:8px}
+.appnav-tabs .tab:hover{background:rgba(255,255,255,.12);color:#fff}
+.appnav-tabs .tab.active{background:#fff;color:var(--brand-navy)}
+.appnav-user{display:flex;align-items:center;gap:9px;font-size:12.5px;color:rgba(255,255,255,.82)}
 .appnav-user .who{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .role-chip{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
-.role-chip.tech{background:#e8f0fe;color:var(--altice)} .role-chip.ger{background:#eef0f3;color:var(--same)}
-.logout{border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 10px;font-size:12.5px;cursor:pointer}
-.logout:hover{border-color:var(--up);color:var(--up)}
+.role-chip.tech{background:var(--gov-blue-light);color:var(--brand-navy)} .role-chip.ger{background:rgba(255,255,255,.22);color:#fff}
+.logout{border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;border-radius:7px;padding:5px 11px;font-size:12.5px;cursor:pointer}
+.logout:hover{background:#fff;color:var(--brand-navy);border-color:#fff}
 
-.pagehead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-.pagehead h1{font-size:22px;margin:0;letter-spacing:-.2px}
+.pagehead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--line)}
+.pagehead h1{font-size:22px;margin:0;letter-spacing:-.2px;font-weight:700;color:var(--brand-navy)}
 .pagehead .sub{color:var(--muted);font-size:13px}
 
 /* Login */
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg)}
-.login-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:28px;width:100%;max-width:360px}
-.login-box h1{font-size:20px;margin:0}
+.login-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:20px;background:linear-gradient(160deg,var(--brand-navy),var(--brand-navy-2) 60%,var(--gov-blue))}
+.login-logo img{height:56px;width:auto;display:block}
+.login-logo.text{color:#fff;font-weight:700;font-size:22px;letter-spacing:.5px}
+.login-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.28);padding:28px;width:100%;max-width:370px;border-top:4px solid var(--gov-blue)}
+.login-box h1{font-size:19px;margin:0;color:var(--brand-navy)}
 .login-box .sub{color:var(--muted);font-size:13px;margin:2px 0 18px}
 .login-box .field{max-width:none}
 .login-box .btn{width:100%;justify-content:center;margin-top:6px}
@@ -41,7 +52,7 @@ a{color:var(--accent)}
 .bars{display:flex;align-items:flex-end;gap:14px;overflow-x:auto;padding-bottom:6px;min-height:170px}
 .bar-col{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px;flex:1}
 .bar-val{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.bar{width:100%;max-width:52px;background:linear-gradient(180deg,#4f7bf0,#2f5fe0);border-radius:5px 5px 0 0}
+.bar{width:100%;max-width:52px;background:linear-gradient(180deg,var(--gov-blue-med),var(--gov-blue));border-radius:5px 5px 0 0}
 .bar-lbl{font-size:12px;font-weight:600}
 
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:4px}

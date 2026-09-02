@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '../lib/supabase/client';
@@ -6,6 +7,7 @@ import { createClient } from '../lib/supabase/client';
 export default function Nav({ email, role, configured }) {
   const path = usePathname();
   const router = useRouter();
+  const [logoOk, setLogoOk] = useState(true);
 
   const tabs = [
     { href: '/', label: 'Comparación' },
@@ -23,7 +25,11 @@ export default function Nav({ email, role, configured }) {
   return (
     <nav className="appnav">
       <div className="appnav-inner">
-        <div className="appnav-brand">Facturas Claro/Altice</div>
+        <div className="appnav-brand">
+          {logoOk
+            ? <img src="/corphotels-blanco.png" alt="CORPHOTELS" onError={() => setLogoOk(false)} />
+            : 'CORPHOTELS'}
+        </div>
         <div className="appnav-tabs">
           {tabs.map(t => (
             <Link key={t.href} href={t.href}

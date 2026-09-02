@@ -8,6 +8,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState(null);
+  const [logoOk, setLogoOk] = useState(true);
   const router = useRouter();
 
   const configured = !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
@@ -25,6 +26,11 @@ export default function LoginPage() {
 
   return (
     <div className="login-wrap">
+      <div className={'login-logo' + (logoOk ? '' : ' text')}>
+        {logoOk
+          ? <img src="/corphotels-blanco.png" alt="CORPHOTELS" onError={() => setLogoOk(false)} />
+          : 'CORPHOTELS'}
+      </div>
       <form className="login-box" onSubmit={submit}>
         <h1>Comparador de Facturas</h1>
         <p className="sub">Claro · Altice</p>
