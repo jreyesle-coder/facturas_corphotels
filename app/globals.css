@@ -9,6 +9,41 @@ body{background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacS
 a{color:var(--accent)}
 .wrap{max-width:1080px;margin:0 auto;padding:24px 20px 64px}
 
+/* Barra de navegación */
+.appnav{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 1px 3px rgba(20,30,50,.05)}
+.appnav-inner{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:18px;min-height:54px;flex-wrap:wrap}
+.appnav-brand{font-weight:700;font-size:14px}
+.appnav-tabs{display:flex;gap:4px;flex:1}
+.appnav-tabs .tab{text-decoration:none;color:var(--muted);font-size:13.5px;font-weight:600;padding:8px 12px;border-radius:8px}
+.appnav-tabs .tab:hover{background:#f2f5f9;color:var(--ink)}
+.appnav-tabs .tab.active{background:#eef3ff;color:var(--accent)}
+.appnav-user{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--muted)}
+.appnav-user .who{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.role-chip{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.role-chip.tech{background:#e8f0fe;color:var(--altice)} .role-chip.ger{background:#eef0f3;color:var(--same)}
+.logout{border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 10px;font-size:12.5px;cursor:pointer}
+.logout:hover{border-color:var(--up);color:var(--up)}
+
+.pagehead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.pagehead h1{font-size:22px;margin:0;letter-spacing:-.2px}
+.pagehead .sub{color:var(--muted);font-size:13px}
+
+/* Login */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg)}
+.login-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:28px;width:100%;max-width:360px}
+.login-box h1{font-size:20px;margin:0}
+.login-box .sub{color:var(--muted);font-size:13px;margin:2px 0 18px}
+.login-box .field{max-width:none}
+.login-box .btn{width:100%;justify-content:center;margin-top:6px}
+
+/* Gráfica de barras (Historial) */
+.cb-title{font-size:15px;margin:0 0 14px}
+.bars{display:flex;align-items:flex-end;gap:14px;overflow-x:auto;padding-bottom:6px;min-height:170px}
+.bar-col{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px;flex:1}
+.bar-val{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{width:100%;max-width:52px;background:linear-gradient(180deg,#4f7bf0,#2f5fe0);border-radius:5px 5px 0 0}
+.bar-lbl{font-size:12px;font-weight:600}
+
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:4px}
 .topbar h1{font-size:22px;margin:0;letter-spacing:-.2px}
 .topbar .sub{color:var(--muted);font-size:13px}

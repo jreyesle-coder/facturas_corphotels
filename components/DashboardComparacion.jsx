@@ -1,9 +1,8 @@
 'use client';
 import { useState } from 'react';
-import Link from 'next/link';
 import { RD, PCT, serviceLabel, buildAccounts, providerTotals, lineComparison } from '../lib/compare';
 
-export default function Dashboard({ invoices, configured, error }) {
+export default function DashboardComparacion({ invoices, configured, error }) {
   const accounts = buildAccounts(invoices || []);
   const comparables = accounts.filter(a => a.previous);
   const nuevas = accounts.filter(a => !a.previous);
@@ -11,34 +10,22 @@ export default function Dashboard({ invoices, configured, error }) {
 
   return (
     <div className="wrap">
-      <div className="topbar">
-        <div>
-          <h1>Comparador de Facturas</h1>
-          <span className="sub">Claro · Altice — variación mes a mes</span>
-        </div>
-        <Link className="nav-link" href="/cargar">⬆ Cargar facturas</Link>
+      <div className="pagehead">
+        <h1>Comparación</h1>
+        <span className="sub">Mes actual vs. mes anterior, por cuenta</span>
       </div>
-      <p className="lead">Vista de solo lectura. Los datos los sube la persona autorizada desde “Cargar facturas”.</p>
 
-      {!configured && (
-        <div className="notice">
-          <b>Falta configurar Supabase.</b> Define <code>NEXT_PUBLIC_SUPABASE_URL</code> y <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> en las variables de entorno. Mientras tanto no hay datos que mostrar.
-        </div>
-      )}
+      {!configured && <ConfigNotice />}
       {configured && error && <div className="notice"><b>Error leyendo datos:</b> {error}</div>}
 
       {accounts.length === 0 ? (
-        <div className="empty">
-          <h3>Aún no hay facturas cargadas</h3>
-          <p>Cuando se suban las primeras facturas, aquí aparecerá la comparación y el historial.</p>
-        </div>
+        <Empty />
       ) : (
         <>
           <Summary accounts={accounts} providers={providers} />
-
           {comparables.length > 0 && (
             <>
-              <SectionTitle title="Comparación por cuenta" sub={`${comparables.length} cuenta${comparables.length !== 1 ? 's' : ''} con dos o más períodos`} />
+              <SectionTitle title="Detalle por cuenta" sub={`${comparables.length} cuenta${comparables.length !== 1 ? 's' : ''} con período anterior`} />
               {comparables.map(a => <AccountBlock key={a.key} a={a} />)}
             </>
           )}
@@ -51,13 +38,17 @@ export default function Dashboard({ invoices, configured, error }) {
         </>
       )}
 
-      <footer className="foot">
-        Se compara el <b>cargo del mes</b> (sin arrastrar atrasos). Cada cuenta se compara con su propio período anterior.
-      </footer>
+      <footer className="foot">Se compara el <b>cargo del mes</b> (sin arrastrar atrasos). Cada cuenta contra su propio período anterior.</footer>
     </div>
   );
 }
 
+function ConfigNotice() {
+  return <div className="notice"><b>Falta configurar Supabase.</b> Define las variables de entorno y crea los usuarios. Ver el README.</div>;
+}
+function Empty() {
+  return <div className="empty"><h3>Aún no hay facturas cargadas</h3><p>Cuando tecnología suba las primeras facturas, aquí aparecerá la comparación.</p></div>;
+}
 function SectionTitle({ title, sub }) {
   return <div className="section-title"><h2>{title}</h2>{sub && <span>{sub}</span>}</div>;
 }
@@ -113,9 +104,7 @@ function AccountBlock({ a }) {
     : a.status === 'down' ? <span className="badge down">▼ bajó</span>
     : a.status === 'same' ? <span className="badge same">= igual</span>
     : <span className="badge new">nueva</span>;
-
   const lines = lineComparison(cur, prev);
-  const maxCharge = Math.max(...a.history.map(h => h.monthCharge || 0), 1);
 
   return (
     <div className={'acct status-' + a.status + (open ? ' open' : '')}>
@@ -157,39 +146,11 @@ function AccountBlock({ a }) {
               <tr className="total"><td>Total del mes</td><td className="num">{prev ? RD(prev.monthCharge) : '—'}</td><td className="num">{RD(cur.monthCharge)}</td><DeltaCells prevV={prev ? prev.monthCharge : null} curV={cur.monthCharge} /></tr>
             </tbody>
           </table>
-
-          {a.history.length > 1 && (
-            <div className="history">
-              <h4>Historial — cargo del mes ({a.history.length} períodos)</h4>
-              <div className="spark">
-                {a.history.map((h, i) => <i key={i} style={{ height: Math.max(3, (h.monthCharge || 0) / maxCharge * 34) + 'px' }} title={h.periodLabel + ': ' + RD(h.monthCharge)} />)}
-              </div>
-              <table className="hist-table">
-                <thead><tr><th>Período</th><th>Cargo del mes</th><th>Δ vs. anterior</th><th>Total a pagar</th></tr></thead>
-                <tbody>
-                  {a.history.map((h, i) => {
-                    const p = i > 0 ? a.history[i - 1] : null;
-                    const d = p ? (h.monthCharge || 0) - (p.monthCharge || 0) : null;
-                    const cls = d == null ? '' : (Math.abs(d) < 0.005 ? 'same' : d > 0 ? 'up' : 'down');
-                    return (
-                      <tr key={i}>
-                        <td>{h.periodLabel}</td>
-                        <td>{RD(h.monthCharge)}</td>
-                        <td className={cls}>{d == null ? '—' : (d > 0 ? '+' : '') + RD(d)}</td>
-                        <td>{RD(h.totalToPay)}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          )}
-
           <div className="detail-foot">
             <InfoPair label="Balance anterior" prevV={prev ? prev.balancePrev : null} curV={cur.balancePrev} />
             <InfoPair label="Atraso / balance al corte" prevV={prev ? prev.arrears : null} curV={cur.arrears} />
             <InfoPair label="Total a pagar (incluye atrasos)" prevV={prev ? prev.totalToPay : null} curV={cur.totalToPay} />
-            <div className="detail-note">La comparación principal usa el <b>cargo del mes</b> (no el “Total a pagar”, que arrastra balances anteriores).</div>
+            <div className="detail-note">La comparación usa el <b>cargo del mes</b>. El historial completo está en la pestaña “Historial”.</div>
           </div>
         </div>
       )}
@@ -200,7 +161,6 @@ function AccountBlock({ a }) {
 function TaxRow({ lbl, k, prev, cur }) {
   return <tr className="tax"><td>{lbl}</td><td className="num">{prev ? RD(prev[k]) : '—'}</td><td className="num">{RD(cur[k])}</td><DeltaCells prevV={prev ? prev[k] : null} curV={cur[k]} /></tr>;
 }
-
 function InfoPair({ label, prevV, curV }) {
   return <div className="ip"><span className="ip-l">{label}</span><span className="ip-v">{prevV != null ? RD(prevV) + ' → ' : ''}<b>{RD(curV)}</b></span></div>;
 }
