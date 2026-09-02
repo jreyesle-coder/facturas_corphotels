@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { RD, PCT, serviceLabel, buildAccounts, providerTotals, lineComparison } from '../lib/compare';
+import { buildFindings, buildReportHtml } from '../lib/findings';
 
 export default function DashboardComparacion({ invoices, configured, error }) {
   const accounts = buildAccounts(invoices || []);
@@ -35,6 +36,8 @@ export default function DashboardComparacion({ invoices, configured, error }) {
               {nuevas.map(a => <AccountBlock key={a.key} a={a} />)}
             </>
           )}
+
+          <FindingsPanel accounts={accounts} />
         </>
       )}
 
@@ -155,6 +158,43 @@ function AccountBlock({ a }) {
         </div>
       )}
     </div>
+  );
+}
+
+function FindingsPanel({ accounts }) {
+  const f = buildFindings(accounts);
+
+  function imprimir() {
+    const w = window.open('', '_blank');
+    if (!w) { alert('Habilita las ventanas emergentes para generar el informe.'); return; }
+    w.document.open();
+    w.document.write(buildReportHtml(f));
+    w.document.close();
+  }
+
+  const Group = ({ title, items, cls }) => items.length ? (
+    <div className="fnd-group">
+      <div className={'fnd-group-title ' + cls}>{title} <span>({items.length})</span></div>
+      <ul>{items.map((i, k) => <li key={k}>{i.text}</li>)}</ul>
+    </div>
+  ) : null;
+
+  return (
+    <>
+      <div className="section-title fnd-head">
+        <h2>Hallazgos</h2>
+        <span>Resumen automático de las variaciones</span>
+        <button className="btn btn-report" onClick={imprimir}>🖨 Generar informe</button>
+      </div>
+      <div className="findings">
+        <div className="fnd-summary">{f.summaryText}</div>
+        <Group title="Subieron" items={f.subieron} cls="up" />
+        <Group title="Bajaron" items={f.bajaron} cls="down" />
+        <Group title="Sin cambio" items={f.iguales} cls="same" />
+        <Group title="Cuentas nuevas (sin comparación)" items={f.nuevas} cls="new" />
+        <div className="detail-note">Los hallazgos se generan a partir del desglose por línea de cada factura. El botón “Generar informe” abre una versión imprimible (o para guardar en PDF).</div>
+      </div>
+    </>
   );
 }
 

@@ -148,5 +148,20 @@ a{color:var(--accent)}
 .spinner{width:15px;height:15px;border:2px solid #cbd6f5;border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* Hallazgos */
+.fnd-head{align-items:center}
+.fnd-head .btn-report{margin-left:auto}
+.btn-report{border:1px solid var(--gov-blue);background:var(--gov-blue);color:#fff;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer}
+.btn-report:hover{background:#0c477f}
+.findings{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--gov-blue);border-radius:12px;box-shadow:var(--shadow);padding:16px 18px}
+.fnd-summary{background:#eef3fa;border:1px solid #dbe6f4;border-radius:8px;padding:11px 13px;font-weight:600;color:var(--brand-navy);margin-bottom:12px}
+.fnd-group{margin-bottom:12px}
+.fnd-group-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.fnd-group-title.up{color:var(--up)} .fnd-group-title.down{color:var(--down)}
+.fnd-group-title.same{color:var(--same)} .fnd-group-title.new{color:var(--gov-blue)}
+.fnd-group-title span{font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0}
+.findings ul{margin:0;padding-left:20px}
+.findings li{margin:5px 0;font-size:13px;line-height:1.5}
+
 .foot{margin-top:40px;color:var(--muted);font-size:11.5px;text-align:center;line-height:1.7}
 @media (max-width:640px){ .acct-svc{max-width:170px} .acct-fig{width:100%;justify-content:flex-start} }
