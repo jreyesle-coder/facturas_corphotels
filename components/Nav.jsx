@@ -15,7 +15,6 @@ export default function Nav({ email, role, configured }) {
     { href: '/historial', label: 'Historial' },
     { href: '/vencimientos', label: 'Vencimientos' },
   ];
-  if (canWrite(role)) tabs.push({ href: '/cargar', label: 'Cargar' });
 
   async function logout() {
     const sb = createClient();
@@ -27,11 +26,11 @@ export default function Nav({ email, role, configured }) {
   return (
     <nav className="appnav">
       <div className="appnav-inner">
-        <div className="appnav-brand">
+        <Link href="/" className="appnav-brand" title="Ir al inicio">
           {logoOk
-            ? <img src="/logo-blanco.svg" alt="CORPHOTELS" onError={() => setLogoOk(false)} />
+            ? <img src="/logo-blanco.svg" alt="CORPHOTELS — Inicio" onError={() => setLogoOk(false)} />
             : 'CORPHOTELS'}
-        </div>
+        </Link>
         <div className="appnav-tabs">
           {tabs.map(t => (
             <Link key={t.href} href={t.href}
@@ -40,6 +39,11 @@ export default function Nav({ email, role, configured }) {
             </Link>
           ))}
         </div>
+        {canWrite(role) && (
+          <Link href="/cargar" className={'tab-cta' + (path.startsWith('/cargar') ? ' active' : '')}>
+            ⬆ Cargar factura
+          </Link>
+        )}
         {configured && email && (
           <div className="appnav-user">
             <span className="who">{email}</span>
