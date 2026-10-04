@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse } from 'next/server';
+import { canWrite } from './lib/roles';
 
 // Refresca la sesión y protege rutas:
 //  - páginas: requieren login (si no, → /login)
@@ -39,7 +40,7 @@ export async function middleware(request) {
   if (user && path === '/login') {
     return NextResponse.redirect(new URL('/', request.url));
   }
-  if (user && path.startsWith('/cargar') && user.app_metadata?.role !== 'tecnologia') {
+  if (user && path.startsWith('/cargar') && !canWrite(user.app_metadata?.role)) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 

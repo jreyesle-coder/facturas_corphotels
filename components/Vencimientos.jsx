@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { RD, buildAccounts, serviceLabel } from '../lib/compare';
 import { serviceLabelOf, serviceIconOf } from '../lib/services';
+import { canWrite } from '../lib/roles';
 
 function daysUntil(iso) {
   if (!iso) return null;
@@ -106,7 +107,7 @@ export default function Vencimientos({ invoices, configured, error, role }) {
                 <div className="venc-estado">
                   <span className={'venc-badge b-' + st.key}>{st.label}</span>
                 </div>
-                {role === 'tecnologia' && (
+                {canWrite(role) && (
                   <div className="venc-action">
                     {inv.paid
                       ? <button className="mini-btn" disabled={busyId === inv.id} onClick={() => marcarPagada(inv, false)}>Reabrir</button>

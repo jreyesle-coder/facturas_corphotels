@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '../lib/supabase/client';
+import { canWrite, roleLabel, roleChipClass } from '../lib/roles';
 
 export default function Nav({ email, role, configured }) {
   const path = usePathname();
@@ -14,7 +15,7 @@ export default function Nav({ email, role, configured }) {
     { href: '/historial', label: 'Historial' },
     { href: '/vencimientos', label: 'Vencimientos' },
   ];
-  if (role === 'tecnologia') tabs.push({ href: '/cargar', label: 'Cargar' });
+  if (canWrite(role)) tabs.push({ href: '/cargar', label: 'Cargar' });
 
   async function logout() {
     const sb = createClient();
@@ -42,7 +43,7 @@ export default function Nav({ email, role, configured }) {
         {configured && email && (
           <div className="appnav-user">
             <span className="who">{email}</span>
-            <span className={'role-chip ' + (role === 'tecnologia' ? 'tech' : 'ger')}>{role === 'tecnologia' ? 'Tecnología' : 'Gerencia'}</span>
+            <span className={'role-chip ' + roleChipClass(role)}>{roleLabel(role)}</span>
             <button className="logout" onClick={logout}>Salir</button>
           </div>
         )}

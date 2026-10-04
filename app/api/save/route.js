@@ -1,6 +1,7 @@
 import { createClient as createAdminClient } from '@supabase/supabase-js';
 import { createClient as createServerClient } from '../../../lib/supabase/server';
 import { invoiceToRow } from '../../../lib/compare';
+import { canWrite } from '../../../lib/roles';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -14,7 +15,7 @@ export async function POST(req) {
   const sb = createServerClient();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return json({ error: 'No autenticado.' }, 401);
-  if (user.app_metadata?.role !== 'tecnologia') return json({ error: 'No autorizado: se requiere rol tecnología.' }, 403);
+  if (!canWrite(user.app_metadata?.role)) return json({ error: 'No autorizado: se requiere rol tecnología o super usuario.' }, 403);
 
   // 2) Valida el cuerpo.
   let body;
