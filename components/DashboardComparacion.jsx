@@ -1,13 +1,17 @@
 'use client';
 import { useState } from 'react';
-import { RD, PCT, serviceLabel, buildAccounts, providerTotals, lineComparison } from '../lib/compare';
+import { RD, PCT, serviceLabel, buildAccounts, providerTotals, providersIn, lineComparison } from '../lib/compare';
 import { buildFindings, buildReportHtml } from '../lib/findings';
+import ServiceTabs, { firstService } from './ServiceTabs';
 
 export default function DashboardComparacion({ invoices, configured, error }) {
-  const accounts = buildAccounts(invoices || []);
+  const all = invoices || [];
+  const [service, setService] = useState(firstService(all));
+  const scoped = all.filter(i => (i.serviceType || 'telefonia') === service);
+  const accounts = buildAccounts(scoped);
   const comparables = accounts.filter(a => a.previous);
   const nuevas = accounts.filter(a => !a.previous);
-  const providers = ['Claro', 'Altice'].filter(p => accounts.some(a => a.provider === p));
+  const providers = providersIn(accounts);
 
   return (
     <div className="wrap">
@@ -19,8 +23,12 @@ export default function DashboardComparacion({ invoices, configured, error }) {
       {!configured && <ConfigNotice />}
       {configured && error && <div className="notice"><b>Error leyendo datos:</b> {error}</div>}
 
-      {accounts.length === 0 ? (
+      {all.length > 0 && <ServiceTabs invoices={all} value={service} onChange={setService} />}
+
+      {all.length === 0 ? (
         <Empty />
+      ) : accounts.length === 0 ? (
+        <div className="empty"><h3>Sin facturas en este servicio</h3><p>Elige otro servicio o carga facturas.</p></div>
       ) : (
         <>
           <Summary accounts={accounts} providers={providers} />

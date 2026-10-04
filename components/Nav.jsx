@@ -12,6 +12,7 @@ export default function Nav({ email, role, configured }) {
   const tabs = [
     { href: '/', label: 'Comparación' },
     { href: '/historial', label: 'Historial' },
+    { href: '/vencimientos', label: 'Vencimientos' },
   ];
   if (role === 'tecnologia') tabs.push({ href: '/cargar', label: 'Cargar' });
 

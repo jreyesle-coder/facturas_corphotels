@@ -1,13 +1,17 @@
 'use client';
 import { useState } from 'react';
 import { RD, serviceLabel, buildAccounts } from '../lib/compare';
+import ServiceTabs, { firstService } from './ServiceTabs';
 
 export default function Historial({ invoices, configured, error }) {
-  const accounts = buildAccounts(invoices || []);
+  const all = invoices || [];
+  const [service, setService] = useState(firstService(all));
+  const scoped = all.filter(i => (i.serviceType || 'telefonia') === service);
+  const accounts = buildAccounts(scoped);
 
-  // Evolución total por período (suma de cargo del mes de todas las cuentas con ese período).
+  // Evolución total por período (suma de cargo del mes de las cuentas del servicio).
   const byPeriod = {};
-  for (const inv of invoices || []) {
+  for (const inv of scoped) {
     const k = inv.periodKey;
     (byPeriod[k] = byPeriod[k] || { key: k, label: inv.periodLabel, sortKey: inv.sortKey, total: 0, count: 0 });
     byPeriod[k].total += inv.monthCharge || 0; byPeriod[k].count++;
@@ -25,8 +29,12 @@ export default function Historial({ invoices, configured, error }) {
       {!configured && <div className="notice"><b>Falta configurar Supabase.</b> Ver el README.</div>}
       {configured && error && <div className="notice"><b>Error leyendo datos:</b> {error}</div>}
 
-      {accounts.length === 0 ? (
+      {all.length > 0 && <ServiceTabs invoices={all} value={service} onChange={setService} />}
+
+      {all.length === 0 ? (
         <div className="empty"><h3>Aún no hay facturas cargadas</h3><p>El historial aparecerá cuando se carguen facturas.</p></div>
+      ) : accounts.length === 0 ? (
+        <div className="empty"><h3>Sin facturas en este servicio</h3><p>Elige otro servicio.</p></div>
       ) : (
         <>
           {periods.length > 1 && (

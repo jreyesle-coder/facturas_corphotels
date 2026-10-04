@@ -68,7 +68,7 @@ a{color:var(--accent)}
 .empty h3{color:var(--ink);margin:0 0 8px}
 
 .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:26px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow);border-top:3px solid var(--muted)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow);border-top:3px solid var(--gov-blue)}
 .card.prov-claro{border-top-color:var(--claro)} .card.prov-altice{border-top-color:var(--altice)}
 .card.card-grand{border-top-color:var(--accent);background:linear-gradient(180deg,#fbfcff,#fff)}
 .card-title{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.4px;display:flex;justify-content:space-between;align-items:center}
@@ -162,6 +162,58 @@ a{color:var(--accent)}
 .fnd-group-title span{font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0}
 .findings ul{margin:0;padding-left:20px}
 .findings li{margin:5px 0;font-size:13px;line-height:1.5}
+
+/* Pestañas de servicio */
+.svc-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.svc-tab{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.svc-tab:hover{border-color:var(--gov-blue);color:var(--gov-blue)}
+.svc-tab.active{background:var(--gov-blue);border-color:var(--gov-blue);color:#fff}
+.svc-ico{font-size:14px;line-height:1}
+
+/* Modo de carga */
+.mode-switch{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.mode-btn{border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:9px 14px;font-size:13.5px;font-weight:600;color:var(--muted);cursor:pointer}
+.mode-btn:hover{border-color:var(--gov-blue);color:var(--gov-blue)}
+.mode-btn.active{background:var(--gov-blue);border-color:var(--gov-blue);color:#fff}
+
+/* Formulario de captura manual */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:6px}
+.form-grid .field{max-width:none;margin-bottom:0}
+.form-grid select,.form-grid input{border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:14px;font-family:inherit;background:#fff}
+.chkbox{font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:7px;cursor:pointer}
+
+/* Vencimientos */
+.venc-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:16px}
+.venc-kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:16px;border-left:4px solid var(--same)}
+.venc-kpi.bad{border-left-color:var(--gov-red)} .venc-kpi.warn{border-left-color:#e0a400}
+.venc-kpi .k-num{font-size:26px;font-weight:700;color:var(--brand-navy);letter-spacing:-.5px}
+.venc-kpi .k-num.k-money{font-size:20px}
+.venc-kpi .k-lbl{color:var(--muted);font-size:12px;margin-top:2px}
+.venc-toolbar{margin-bottom:10px}
+.venc-list{display:flex;flex-direction:column;gap:8px}
+.venc-row{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--same);border-radius:11px;box-shadow:var(--shadow);padding:11px 14px;flex-wrap:wrap}
+.venc-row.st-vencida{border-left-color:var(--gov-red)}
+.venc-row.st-proxima{border-left-color:#e0a400}
+.venc-row.st-aldia{border-left-color:var(--down)}
+.venc-row.st-paid{border-left-color:var(--same);opacity:.7}
+.venc-svc .svc-ico{font-size:22px}
+.venc-main{flex:1;min-width:180px}
+.venc-top{font-size:14px}
+.venc-top .venc-sub{color:var(--muted);font-size:12px;margin-left:8px}
+.venc-meta{color:var(--muted);font-size:12.5px;margin-top:2px}
+.venc-amt{text-align:right;min-width:120px}
+.venc-amt .amt-main{font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
+.venc-amt .amt-sub{color:var(--muted);font-size:11px}
+.venc-badge{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.venc-badge.b-vencida{background:#fde7e8;color:var(--gov-red)}
+.venc-badge.b-proxima{background:#fcf1d6;color:#9a7400}
+.venc-badge.b-aldia{background:#e7f6ee;color:var(--down)}
+.venc-badge.b-paid{background:#eef0f3;color:var(--same)}
+.venc-badge.b-nodate{background:#eef0f3;color:var(--same)}
+.mini-btn{border:1px solid var(--line);background:#fff;border-radius:7px;padding:6px 11px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.mini-btn:hover{border-color:var(--gov-blue);color:var(--gov-blue)}
+.mini-btn.ok{border-color:var(--down);color:var(--down)}
+.mini-btn.ok:hover{background:var(--down);color:#fff}
 
 .foot{margin-top:40px;color:var(--muted);font-size:11.5px;text-align:center;line-height:1.7}
 @media (max-width:640px){ .acct-svc{max-width:170px} .acct-fig{width:100%;justify-content:flex-start} }
