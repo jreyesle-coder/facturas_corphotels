@@ -1,21 +1,26 @@
 import './globals.css';
-import { Poppins } from 'next/font/google';
+import localFont from 'next/font/local';
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-poppins',
+const futura = localFont({
+  src: [
+    { path: './fonts/FuturaPTBook.otf', weight: '400', style: 'normal' },
+    { path: './fonts/FuturaPTMedium.otf', weight: '500', style: 'normal' },
+    { path: './fonts/FuturaPTDemi.otf', weight: '600', style: 'normal' },
+    { path: './fonts/FuturaPTBold.otf', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-futura',
   display: 'swap',
 });
 
 export const metadata = {
-  title: 'CORPHOTELS · Comparador de Facturas',
-  description: 'Comparación mes a mes de facturas Claro y Altice — CORPHOTELS',
+  title: 'CORPHOTELS · Gestión de Facturas',
+  description: 'Comparación y control de facturas de servicios — CORPHOTELS',
+  icons: { icon: '/favicon.png' },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={poppins.variable}>
+    <html lang="es" className={futura.variable}>
       <body>{children}</body>
     </html>
   );

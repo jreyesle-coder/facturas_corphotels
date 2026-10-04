@@ -1,15 +1,15 @@
 :root{
-  /* Paleta oficial — Sistema de Diseño Dominicano + bandera */
-  --gov-blue:#0F539C;         /* azul primario del gobierno */
-  --gov-blue-med:#66A1DE;
-  --gov-blue-light:#9FD0FD;
-  --brand-navy:#0C2C54;       /* azul institucional profundo (barra / login) */
-  --brand-navy-2:#123a70;
-  --gov-red:#CE1126;          /* rojo bandera */
+  /* Línea gráfica oficial CORPHOTELS */
+  --gov-blue:#1A4072;         /* Azul media noche (primario) */
+  --gov-blue-med:#4a6fa5;
+  --gov-blue-light:#acc1dd;
+  --brand-navy:#001840;       /* Azul profundo (barra / login) */
+  --brand-navy-2:#15345f;
+  --gov-red:#EB282E;          /* Rojo caribe */
   --bg:#f3f5f8; --panel:#ffffff; --ink:#16233a; --muted:#5f6b7c; --line:#e2e7ef;
-  --claro:#da2f2f; --altice:#1566d6; --up:#CE1126; --down:#1a8f4c; --same:#5f6b7c;
-  --accent:var(--gov-blue); --shadow:0 1px 3px rgba(12,44,84,.08),0 4px 16px rgba(12,44,84,.06);
-  --font:var(--font-poppins),"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  --claro:#da2f2f; --altice:#1566d6; --up:#EB282E; --down:#1a8f4c; --same:#5f6b7c;
+  --accent:var(--gov-blue); --shadow:0 1px 3px rgba(0,24,64,.08),0 4px 16px rgba(0,24,64,.06);
+  --font:var(--font-futura),"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -39,7 +39,7 @@ a{color:var(--accent)}
 
 /* Login */
 .login-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:20px;background:linear-gradient(160deg,var(--brand-navy),var(--brand-navy-2) 60%,var(--gov-blue))}
-.login-logo img{height:82px;width:auto;display:block}
+.login-logo img{height:116px;width:auto;display:block}
 .login-logo.text{color:#fff;font-weight:700;font-size:22px;letter-spacing:.5px}
 .login-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.28);padding:28px;width:100%;max-width:370px;border-top:4px solid var(--gov-blue)}
 .login-box h1{font-size:19px;margin:0;color:var(--brand-navy)}

@@ -27,7 +27,7 @@ export default function Nav({ email, role, configured }) {
       <div className="appnav-inner">
         <div className="appnav-brand">
           {logoOk
-            ? <img src="/corphotels-blanco.png" alt="CORPHOTELS" onError={() => setLogoOk(false)} />
+            ? <img src="/logo-blanco.svg" alt="CORPHOTELS" onError={() => setLogoOk(false)} />
             : 'CORPHOTELS'}
         </div>
         <div className="appnav-tabs">

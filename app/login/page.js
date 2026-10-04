@@ -28,7 +28,7 @@ export default function LoginPage() {
     <div className="login-wrap">
       <div className={'login-logo' + (logoOk ? '' : ' text')}>
         {logoOk
-          ? <img src="/corphotels-blanco.png" alt="CORPHOTELS" onError={() => setLogoOk(false)} />
+          ? <img src="/logo-centralizado-blanco.svg" alt="CORPHOTELS" onError={() => setLogoOk(false)} />
           : 'CORPHOTELS'}
       </div>
       <form className="login-box" onSubmit={submit}>
