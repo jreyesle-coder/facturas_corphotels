@@ -36,6 +36,7 @@ a{color:var(--accent)}
 .role-chip{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
 .role-chip.tech{background:var(--gov-blue-light);color:var(--brand-navy)} .role-chip.ger{background:rgba(255,255,255,.22);color:#fff}
 .role-chip.super{background:var(--gov-red);color:#fff}
+.role-chip.oper{background:#cdebd9;color:#1a6b3f}
 .logout{border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;border-radius:7px;padding:5px 11px;font-size:12.5px;cursor:pointer}
 .logout:hover{background:#fff;color:var(--brand-navy);border-color:#fff}
 
